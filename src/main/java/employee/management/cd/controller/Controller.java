@@ -22,6 +22,6 @@ public class Controller {
 
     @PostMapping("/register")
     public String register(@RequestBody Employee employee) {
-        return service
+        return service;
     }
 }
