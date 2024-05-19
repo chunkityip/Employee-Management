@@ -13,6 +13,9 @@ public interface EmployeeRepository extends MongoRepository<Employee, Integer> {
         //return true if the email already in the database
         boolean existsByEmail(String email);
 
+        //A method to return Employee email
+        List<Employee> getByEmail(String email);
+
         //A method to look for Employee by their first name
         List<Employee> findByFirstName(String firstname);
 
@@ -23,8 +26,7 @@ public interface EmployeeRepository extends MongoRepository<Employee, Integer> {
         //A method to look for Employee e-mail
         Employee findByEmail(String username);
 
-        //A method to return Employee email
-        List<Employee> getByEmail(String email);
+
 
 
 }
