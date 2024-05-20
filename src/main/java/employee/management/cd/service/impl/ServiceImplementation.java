@@ -5,10 +5,14 @@ import employee.management.cd.dao.EmployeeRepository;
 import employee.management.cd.model.Employee;
 import employee.management.cd.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ServiceImplementation implements EmployeeService {
@@ -90,6 +94,37 @@ public class ServiceImplementation implements EmployeeService {
         } else {
             return null;
         }
+    }
+
+    //A method to get Employee info base on the first name
+    @Override
+    public List<Employee> getByFirstName(String firstname) {
+        return repository.findByFirstName(firstname);
+    }
+
+    //A method to get Employee experience
+    @Override
+    public List<Employee> getEmployeeByExperience(int experience) {
+        return repository.findByExperience(experience);
+    }
+
+    //A method to get all Employee info base on page
+    @Override
+    public Map<String, Object> getAlLEmployeeInPage(int pageNo, int pageSize, String sortBy) {
+        //Since the page is following ascending order , we need order structure so LinkedHashMap
+        //Think of LinkedHashMap as the ordered version of HashMap while HashMap didn't guarantee order
+        Map<String , Object> response = new LinkedHashMap<String , Object>();
+        Sort sort = Sort.by(sortBy);
+
+        PageRequest page = PageRequest.of(pageNo , pageSize , sort);
+        Page<Employee> employeePage = repository.findAll(page);
+
+        response.put("Date" , employeePage.getContent());
+        response.put("Total Number of Pages" , employeePage.getTotalPages());
+        response.put("Current page number" , employeePage.getNumber());
+        response.put("Total number of employees" , employeePage.getTotalElements());
+
+        return response;
     }
 
 
