@@ -19,7 +19,6 @@ public interface EmployeeRepository extends MongoRepository<Employee, Integer> {
         //A method to look for Employee by their first name
         List<Employee> findByFirstName(String firstname);
 
-
         //A method to look for Employee work experience
         List<Employee> findByExperience(int experience);
 

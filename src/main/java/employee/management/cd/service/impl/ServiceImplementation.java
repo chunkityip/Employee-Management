@@ -35,6 +35,18 @@ public class ServiceImplementation implements EmployeeService {
         }
     }
 
+    //A method to validate user by their username which is email and password to login
+    @Override
+    public Employee validateUser(String username, String[] password) {
+        Employee employee = repository.findByEmail(username);
+        if (employee != null && employee.getPassword().equals(password)) {
+            return employee;
+        } else {
+            return null;
+        }
+    }
+
+
     //A method to get Employee Email
     //If we found the email , return it
     //else , return null
@@ -54,7 +66,7 @@ public class ServiceImplementation implements EmployeeService {
         // based on the "email" property of the entities.
 
         /*
-        Sort.by:  This is a static factory method used to create a Sort object.
+        Sort.by: This is a static factory method used to create a Sort object.
         It allows you to specify the sorting criteria for your query results
 
         Sort.Direction.ASC: This specifies the direction of the sorting, in this case, ascending order.
@@ -64,7 +76,7 @@ public class ServiceImplementation implements EmployeeService {
         return repository.findAll(Sort.by(Sort.Direction.ASC, "email"));
     }
 
-    //A method to delete employee by their id
+    //A method to cancel registration by their id
     @Override
     public List<Employee> deleteById(int id) {
         repository.deleteById(id);
@@ -85,16 +97,7 @@ public class ServiceImplementation implements EmployeeService {
         }
     }
 
-    //A method to validate user by their username which is email and password
-    @Override
-    public Employee validateUser(String username, String password) {
-        Employee employee = repository.findByEmail(username);
-        if (employee != null && employee.getPassword().equals(password)) {
-            return employee;
-        } else {
-            return null;
-        }
-    }
+
 
     //A method to get Employee info base on the first name
     @Override

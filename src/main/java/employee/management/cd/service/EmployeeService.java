@@ -28,7 +28,7 @@ public interface EmployeeService {
 
     //A method to validate user
     //Since we are just doing linear searching , List is easier
-    public Employee validateUser(String user , String password);
+    public Employee validateUser(String user , String[] password);
 
     //A method to check Employee info base on their first name
     //Since we are just doing linear searching , List is easier
