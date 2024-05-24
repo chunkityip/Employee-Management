@@ -18,7 +18,7 @@ import java.util.Map;
 public class ServiceImplementation implements EmployeeService {
 
     @Autowired
-    private EmployeeRepository repository;
+    public EmployeeRepository repository;
 
     //A method to register Employee
     //It will first check is the email or Id already exist. If yes , return message

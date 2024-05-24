@@ -42,6 +42,4 @@ public interface EmployeeService {
     //Since we like to display Employee base by page , page as key will be better
     public Map<String , Object> getAlLEmployeeInPage(int pageNo , int pageSize , String sortBy);
 
-
-
 }
